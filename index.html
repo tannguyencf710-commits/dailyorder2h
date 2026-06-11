@@ -15,8 +15,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wrap{display:flex;height:calc(100vh - 65px)}
 .left{width:280px;background:#fff;border-right:1px solid #e0e4ea;padding:18px 14px;display:flex;flex-direction:column;gap:14px;overflow-y:auto}
 .right{flex:1;display:flex;flex-direction:column;overflow:hidden}
-
-/* Upload - cách đơn giản nhất */
 .up-label{display:block;border:2px dashed #ccc;border-radius:10px;padding:28px 16px;text-align:center;cursor:pointer;background:#fafafa;transition:.2s}
 .up-label:hover{border-color:#e25c1c;background:#fff5f0}
 .up-label input{display:none}
@@ -24,37 +22,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .up-text{font-size:13px;color:#888;margin-bottom:12px}
 .up-btn{display:inline-block;padding:8px 20px;background:#e25c1c;color:#fff;border-radius:8px;font-size:13px;font-weight:700}
 .fname{margin-top:10px;font-size:12px;color:#e25c1c;font-weight:600;word-break:break-all}
-
 .sechead{font-size:10px;font-weight:700;color:#aaa;letter-spacing:1px;text-transform:uppercase;border-left:3px solid #e25c1c;padding-left:8px}
 .collist{background:#f8f9fb;border-radius:8px;padding:10px}
 .colitem{font-size:11px;color:#555;padding:2px 0}
 .colitem::before{content:"✓ ";color:#27ae60}
-
 .btnp{padding:11px;background:#e25c1c;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;width:100%}
 .btnp:hover{background:#c94f18}
 .btnp:disabled{background:#ddd;color:#aaa;cursor:not-allowed}
 .btnd{padding:10px;background:#eafaf1;color:#1a7a3c;border:1px solid #a8dab5;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px}
 .btnd:hover{background:#d5f5e3}
 .btnd:disabled{opacity:.4;cursor:not-allowed}
+.btng{padding:10px;background:#e8f0fe;color:#1a5fac;border:1px solid #aec4f7;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px}
+.btng:hover{background:#d2e3fc}
+.btng:disabled{opacity:.4;cursor:not-allowed}
 .msg{font-size:12px;padding:10px;border-radius:8px;background:#f0f9f4;color:#1a7a3c;display:none;line-height:1.6}
-
 .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:14px 18px;background:#fff;border-bottom:1px solid #e0e4ea}
 .stat{background:#f8f9fb;border-radius:8px;padding:10px 14px}
 .slabel{font-size:10px;color:#888;margin-bottom:4px}
 .sval{font-size:22px;font-weight:700}
 .o{color:#e25c1c}.r{color:#c0392b}.g{color:#1a7a3c}.b{color:#1a5fac}.y{color:#b7770d}
-
 .tb{display:flex;gap:4px;padding:10px 18px 0;background:#fff;border-bottom:1px solid #e0e4ea}
 .tab{padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:#888;border-bottom:2px solid transparent;border-radius:6px 6px 0 0}
 .tab.on{color:#e25c1c;border-bottom-color:#e25c1c;background:#fff5f0}
 .cnt{background:#eee;color:#888;border-radius:10px;padding:1px 7px;font-size:11px;margin-left:5px}
 .tab.on .cnt{background:#ffe0d0;color:#e25c1c}
-
 .bar{display:flex;gap:10px;padding:10px 18px;background:#f0f2f5}
 .sq{flex:1;padding:8px 12px;border:1px solid #dde1e8;border-radius:8px;font-size:13px;outline:none;background:#fff}
 .sq:focus{border-color:#e25c1c}
 .fk{padding:8px 10px;border:1px solid #dde1e8;border-radius:8px;font-size:13px;outline:none;background:#fff;cursor:pointer}
-
 .tw{flex:1;overflow:auto;padding:14px 18px;background:#f0f2f5}
 table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:10px;overflow:hidden}
 th{background:#f8f9fb;color:#666;font-weight:700;text-align:left;padding:9px 10px;border-bottom:1px solid #eee;white-space:nowrap;position:sticky;top:0;z-index:1;font-size:11px;text-transform:uppercase}
@@ -79,22 +74,19 @@ tr:hover td{background:#fafbfc}
 <div class="wrap">
   <div class="left">
     <div class="sechead">File Order</div>
-
     <div class="up-label" id="ul">
       <div class="up-icon">📁</div>
       <div class="up-text">Chọn file Order Shopee (.xlsx)</div>
       <input type="file" id="fi" accept=".xlsx,.xls" onchange="onFile(this)" style="display:block;width:100%;margin-top:10px;cursor:pointer;font-size:13px;">
       <div class="fname" id="fn"></div>
     </div>
-
     <div class="sechead">Cột xuất ra</div>
     <div class="collist" id="cols"></div>
-
     <button class="btnp" id="bp" disabled onclick="go()">▶ Lọc & Xử lý</button>
     <button class="btnd" id="bd" disabled onclick="dl()">⬇ Tải file kết quả (.xlsx)</button>
+    <button class="btng" id="bg" disabled onclick="push()">☁ Đẩy lên Google Sheet</button>
     <div class="msg" id="msg"></div>
   </div>
-
   <div class="right">
     <div class="stats">
       <div class="stat"><div class="slabel">Tổng đơn</div><div class="sval o" id="s1">0</div></div>
@@ -129,31 +121,19 @@ tr:hover td{background:#fafbfc}
     </div>
   </div>
 </div>
-
 <script>
 var COLS=['Mã đơn hàng','Ngày đặt hàng','Tên sản phẩm','Tên kho hàng','SKU phân loại hàng','Tên phân loại hàng','Giá gốc','Được Shopee trợ giá','Giá ưu đãi','Số lượng','Mã giảm giá của Shop'];
 var NUM=['Giá gốc','Được Shopee trợ giá','Giá ưu đãi','Số lượng','Mã giảm giá của Shop'];
+var GAS_URL='https://script.google.com/macros/s/AKfycbxRy0pT9g250kwXVqq7-6Kc4L9wczRIHDu8Adqsh-GYOT6NhX-6CESIiI2YwxDZ4cGY/exec';
 var data=[],wb2=null,tab='all';
-
 document.getElementById('cols').innerHTML=COLS.map(function(c){return'<div class="colitem">'+c+'</div>'}).join('');
-
-// Drag & drop
 var ul=document.getElementById('ul');
 ul.addEventListener('dragover',function(e){e.preventDefault();ul.style.borderColor='#e25c1c'});
 ul.addEventListener('dragleave',function(){ul.style.borderColor='#ccc'});
 ul.addEventListener('drop',function(e){e.preventDefault();ul.style.borderColor='#ccc';var f=e.dataTransfer.files[0];if(f&&(f.name.endsWith('.xlsx')||f.name.endsWith('.xls')))load(f)});
-
 function onFile(inp){if(inp.files[0])load(inp.files[0])}
-
-function load(f){
-  document.getElementById('fn').textContent=f.name;
-  ul.style.borderColor='#27ae60';ul.style.background='#f0faf4';
-  document.getElementById('bp').disabled=false;
-  window._f=f;
-}
-
+function load(f){document.getElementById('fn').textContent=f.name;ul.style.borderColor='#27ae60';ul.style.background='#f0faf4';document.getElementById('bp').disabled=false;window._f=f;}
 function fc(h,kw){for(var i=0;i<h.length;i++){if(h[i]&&h[i].indexOf(kw)>=0)return h[i]}return null}
-
 function go(){
   if(!window._f)return;
   var r=new FileReader();
@@ -165,28 +145,12 @@ function go(){
       if(!raw.length){show('File trống!');return}
       var h=Object.keys(raw[0]);
       var lydo=fc(h,'Lý do hủy')||fc(h,'Ly do huy')||h[5];
-      var map={
-        'Mã đơn hàng':h[0],
-        'Ngày đặt hàng':fc(h,'Ngày đặt')||h[2],
-        'Tên sản phẩm':fc(h,'Tên sản phẩm')||h[16],
-        'Tên kho hàng':fc(h,'kho hàng')||h[19],
-        'SKU phân loại hàng':fc(h,'SKU phân')||h[20],
-        'Tên phân loại hàng':fc(h,'Tên phân loại hàng')||h[21],
-        'Giá gốc':h[22],
-        'Được Shopee trợ giá':h[24],
-        'Giá ưu đãi':h[26],
-        'Số lượng':fc(h,'Số lượng')||h[27],
-        'Mã giảm giá của Shop':fc(h,'giảm giá của Shop')||h[31]
-      };
+      var map={'Mã đơn hàng':h[0],'Ngày đặt hàng':fc(h,'Ngày đặt')||h[2],'Tên sản phẩm':fc(h,'Tên sản phẩm')||h[16],'Tên kho hàng':fc(h,'kho hàng')||h[19],'SKU phân loại hàng':fc(h,'SKU phân')||h[20],'Tên phân loại hàng':fc(h,'Tên phân loại hàng')||h[21],'Giá gốc':h[22],'Được Shopee trợ giá':h[24],'Giá ưu đãi':h[26],'Số lượng':fc(h,'Số lượng')||h[27],'Mã giảm giá của Shop':fc(h,'giảm giá của Shop')||h[31]};
       var total=raw.length;
       var clean=raw.filter(function(r2){return!r2[lydo]||r2[lydo]===''});
       data=clean.map(function(r2){
         var row={};
-        COLS.forEach(function(col){
-          var v=map[col]?r2[map[col]]:'';
-          if(NUM.indexOf(col)>=0&&v!==''){var n=Math.round(Number(v));v=isNaN(n)?v:n;}
-          row[col]=v;
-        });
+        COLS.forEach(function(col){var v=map[col]?r2[map[col]]:'';if(NUM.indexOf(col)>=0&&v!==''){var n=Math.round(Number(v));v=isNaN(n)?v:n;}row[col]=v;});
         var nd=row['Ngày đặt hàng'];
         if(nd instanceof Date){row['Ngày đặt hàng']=p(nd.getDate())+'/'+p(nd.getMonth()+1)+'/'+nd.getFullYear()}
         else if(typeof nd==='string'&&nd.indexOf('T')>=0){var d=new Date(nd);row['Ngày đặt hàng']=p(d.getDate())+'/'+p(d.getMonth()+1)+'/'+d.getFullYear()}
@@ -194,28 +158,19 @@ function go(){
       });
       var hn=data.filter(function(r2){return(r2['Tên kho hàng']||'').indexOf('HN')>=0}).length;
       var hcm=data.filter(function(r2){var k=(r2['Tên kho hàng']||'').toUpperCase();return k.indexOf('HCM')>=0||k.indexOf('SG')>=0}).length;
-      document.getElementById('s1').textContent=total;
-      document.getElementById('s2').textContent=total-clean.length;
-      document.getElementById('s3').textContent=data.length;
-      document.getElementById('s4').textContent=hn;
-      document.getElementById('s5').textContent=hcm;
-      document.getElementById('t1').textContent=data.length;
-      document.getElementById('t2').textContent=hn;
-      document.getElementById('t3').textContent=hcm;
-      var ws2=XLSX.utils.json_to_sheet(data,{header:COLS});
-      wb2=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb2,ws2,'orders');
-      document.getElementById('bd').disabled=false;
+      document.getElementById('s1').textContent=total;document.getElementById('s2').textContent=total-clean.length;document.getElementById('s3').textContent=data.length;document.getElementById('s4').textContent=hn;document.getElementById('s5').textContent=hcm;
+      document.getElementById('t1').textContent=data.length;document.getElementById('t2').textContent=hn;document.getElementById('t3').textContent=hcm;
+      var ws2=XLSX.utils.json_to_sheet(data,{header:COLS});wb2=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb2,ws2,'orders');
+      document.getElementById('bd').disabled=false;document.getElementById('bg').disabled=false;
       show('✅ Xử lý xong! Tổng: '+total+' | Hủy: '+(total-clean.length)+' | Còn: '+data.length);
       render();
     }catch(err){show('❌ Lỗi: '+err.message)}
   };
   r.readAsArrayBuffer(window._f);
 }
-
 function p(n){return String(n).padStart(2,'0')}
 function show(m){var el=document.getElementById('msg');el.style.display='block';el.textContent=m}
 function sw(t,el){tab=t;document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on')});el.classList.add('on');render()}
-
 function render(){
   var q=document.getElementById('sq').value.toLowerCase();
   var kho=document.getElementById('fk').value;
@@ -233,11 +188,18 @@ function render(){
     return'<tr><td style="color:#aaa;font-size:11px">'+(i+1)+'</td><td class="sku">'+(r['Mã đơn hàng']||'')+'</td><td style="white-space:nowrap;color:#888">'+(r['Ngày đặt hàng']||'')+'</td><td class="nm" title="'+(r['Tên sản phẩm']||'')+'">'+(r['Tên sản phẩm']||'')+'</td><td>'+kb(r['Tên kho hàng'])+'</td><td class="sku">'+(r['SKU phân loại hàng']||'')+'</td><td style="max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#888">'+(r['Tên phân loại hàng']||'')+'</td><td class="nr">'+f(r['Giá gốc'])+'</td><td class="nr" style="color:#e25c1c">'+f(r['Được Shopee trợ giá'])+'</td><td class="nr" style="color:#1a7a3c">'+f(r['Giá ưu đãi'])+'</td><td class="nr" style="color:#1a5fac;font-weight:700">'+(r['Số lượng']||'')+'</td><td style="color:#888;font-size:12px">'+(r['Mã giảm giá của Shop']!==undefined&&r['Mã giảm giá của Shop']!==''?r['Mã giảm giá của Shop']:'')+'</td></tr>';
   }).join('');
 }
-
-function dl(){
-  if(!wb2)return;
-  var d=new Date(),s=d.getFullYear()+p(d.getMonth()+1)+p(d.getDate());
-  XLSX.writeFile(wb2,'Order_filtered_'+s+'.xlsx');
+function dl(){if(!wb2)return;var d=new Date(),s=d.getFullYear()+p(d.getMonth()+1)+p(d.getDate());XLSX.writeFile(wb2,'Order_filtered_'+s+'.xlsx');}
+function push(){
+  if(!data.length)return;
+  if(GAS_URL.indexOf('PASTE_YOUR')>=0){show('❌ Chưa cấu hình GAS URL. Liên hệ admin!');return;}
+  var bg=document.getElementById('bg');
+  bg.disabled=true;bg.textContent='⏳ Đang đẩy...';
+  var rows=data.map(function(r){return COLS.map(function(c){return r[c]!==undefined&&r[c]!==null?r[c]:''})});
+  var body=new URLSearchParams();
+  body.append('data',JSON.stringify({headers:COLS,rows:rows}));
+  fetch(GAS_URL,{method:'POST',mode:'no-cors',body:body})
+    .then(function(){bg.textContent='✅ Đã đẩy lên Sheet!';show('✅ Đã đẩy '+data.length+' dòng lên Google Sheet Daily Orders 2026!');setTimeout(function(){bg.disabled=false;bg.textContent='☁ Đẩy lên Google Sheet';},4000);})
+    .catch(function(err){bg.disabled=false;bg.textContent='☁ Đẩy lên Google Sheet';show('❌ Lỗi kết nối: '+err.message);});
 }
 </script>
 </body>
